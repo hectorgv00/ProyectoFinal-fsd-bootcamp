@@ -1,0 +1,28 @@
+{
+  "name": "proyectofinal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hectorgv00/ProyectoFinal-fsd-bootcamp.git"
+  },
+  "author": "hectorgv00",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hectorgv00/ProyectoFinal-fsd-bootcamp/issues"
+  },
+  "homepage": "https://github.com/hectorgv00/ProyectoFinal-fsd-bootcamp#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.20",
+    "sequelize": "^6.28.0",
+    "sequelize-cli": "^6.5.2"
+  }
+}
