@@ -25,7 +25,7 @@ app.use(router);
 app.listen(PORT, ()=>{
     console.log(`El servidor esta up y alojado en el puerto => ${PORT}`.bgGreen.red);
 
-    sequelize.sync({force:true}).then(()=> {
+    sequelize.authenticate().then(()=> {
         console.log("Conectados a la DB")
     }).catch(error => {
         console.log('Se ha producido un error: ' + error)

@@ -11,6 +11,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+
+      HR_Users.hasMany(models.Positions)
+      HR_Users.hasMany(models.Skills)
+
+
+
     }
   }
   HR_Users.init({

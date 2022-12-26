@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
 
-      Positions.hasMany(models.HR_Users)
+      Positions.hasMany(models.CandidatePositions)
 
     }
   }
