@@ -16,7 +16,7 @@ var corsOptions = {
 
 // Selecting a Port
 
-const PORT = 3001;
+let PORT = process.env.YOUR_PORT || process.env.PORT || 3001;
 
 app.use(cors(corsOptions));
 app.use(express.json());
