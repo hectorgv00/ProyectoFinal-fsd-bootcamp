@@ -112,14 +112,14 @@ candidatesEndpoints.loginCandidate = async (req, res) => {
 candidatesEndpoints.findByName = async (req, res) => {
   try {
     const { name } = req.params;
-    const users = await models.user.findAll({
+    const candidates = await models.Candidates.findAll({
       where: {
         name: {
-          [Op.like]: `%${name}%`,
+          [Op.like]: `${name}%`,
         },
       },
     });
-    return res.status(200).json(users);
+    return res.status(200).json(candidates);
   } catch (error) {
     res.status(500).json({
       success: false,
