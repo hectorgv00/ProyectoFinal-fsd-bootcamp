@@ -23,7 +23,7 @@ skillsEndpoints.createSkill = async (req, res) => {
       const data = await models.Skills.create({
         name: name,
         HRUserId: payload.id,
-        image_URL: image_URL
+        image_URL: image_URL,
       });
 
       res.status(200).json({
@@ -39,5 +39,32 @@ skillsEndpoints.createSkill = async (req, res) => {
     });
   }
 };
+
+skillsEndpoints.getAllSkills = async (req, res) => {
+  try {
+    const data = await models.Skills.findAll();
+
+    res.status(200).json({
+      success: true,
+      message: data,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+skillsEndpoints.getSkillByName = async (req,res) => {
+    try {
+        
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message,
+          });      
+    }
+}
 
 module.exports = skillsEndpoints;

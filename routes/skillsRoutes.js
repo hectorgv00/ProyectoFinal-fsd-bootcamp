@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const skillsEndpoints = require('../controllers/skillsControllers');
-const { isValidRole } = require('../middleware/auth.middleware');
+const { isValidRole, authBearerMiddleware } = require('../middleware/auth.middleware');
 
 
-router.post("/create", isValidRole("HR_User"), skillsEndpoints.createSkill)
+router.post("/create", authBearerMiddleware, isValidRole("HR_User"), skillsEndpoints.createSkill)
+router.get("/all", authBearerMiddleware, skillsEndpoints.getAllSkills)
+router.get("/:name", authBearerMiddleware, skillsEndpoints.getSkillByName)
 
 module.exports = router;
