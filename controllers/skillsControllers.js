@@ -8,7 +8,7 @@ skillsEndpoints.createSkill = async (req, res) => {
     const { authorization } = req.headers;
     const [bearer, jwt] = authorization.split(" ");
     const payload = jsonwebtoken.verify(jwt, process.env.JWT_SECRET);
-    const { name } = req.body;
+    const { name, image_URL } = req.body;
 
     const unique = await models.Skills.findOne({
       where: { name: name },
@@ -23,6 +23,7 @@ skillsEndpoints.createSkill = async (req, res) => {
       const data = await models.Skills.create({
         name: name,
         HRUserId: payload.id,
+        image_URL: image_URL
       });
 
       res.status(200).json({
