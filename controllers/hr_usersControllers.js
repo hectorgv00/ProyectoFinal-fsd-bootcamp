@@ -90,7 +90,7 @@ hr_usersEndpoints.loginHr_user = async (req, res) => {
         id: userFound.id,
         username: userFound.username,
         email: userFound.email,
-        rol: "HR_User",
+        role: "HR_User",
       },
       secret
     );

@@ -30,7 +30,10 @@ const authBearerMiddleware = async (req, res, next) => {
   };
 
   const isValidRole = (role)  =>  (req, res, next) => {
-    if (req.auth?.role === role) {
+    const { authorization } = req.headers;
+    const [ jwt ] = authorization.split(" ");
+    const payload = jsonwebtoken.verify(jwt, process.env.JWT_SECRET);
+      if (payload.role === role) {
       next();
     } else {
       res.status(403).json({ message: "You are not authorized" });
