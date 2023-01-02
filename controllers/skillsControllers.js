@@ -1,5 +1,6 @@
 const models = require("../models/index");
 const jsonwebtoken = require("jsonwebtoken");
+const { Op } = require("sequelize");
 
 const skillsEndpoints = {};
 
@@ -56,15 +57,29 @@ skillsEndpoints.getAllSkills = async (req, res) => {
   }
 };
 
-skillsEndpoints.getSkillByName = async (req,res) => {
-    try {
-        
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: error.message,
-          });      
-    }
-}
+skillsEndpoints.getSkillByName = async (req, res) => {
+  try {
+    const { name } = req.params;
+
+    const data = await models.Skills.findAll({
+      where: {
+        name: {
+          [Op.like]: `${name}%`,
+        },
+      },
+    });
+
+    res.status(200).json({
+      success: true,
+      message: data,
+    });
+    
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
 
 module.exports = skillsEndpoints;

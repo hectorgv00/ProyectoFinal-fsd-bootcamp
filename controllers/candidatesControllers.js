@@ -117,6 +117,14 @@ candidatesEndpoints.findByName = async (req, res) => {
         },
       },
     });
+
+    if (!candidates) {
+      res.status(400).json({
+        success: false,
+        message: `Candidate ${name} has not been found`,
+      });
+    }
+
     return res.status(200).json(candidates);
   } catch (error) {
     res.status(500).json({
