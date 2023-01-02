@@ -73,7 +73,7 @@ skillsEndpoints.getSkillByName = async (req, res) => {
       success: true,
       message: data,
     });
-    
+
   } catch (error) {
     res.status(500).json({
       success: false,
@@ -81,5 +81,40 @@ skillsEndpoints.getSkillByName = async (req, res) => {
     });
   }
 };
+
+skillsEndpoints.modifySkill = async (req,res) => {
+    try {
+        const { authorization } = req.headers;
+        const [strategy, jwt] = authorization.split(" ");
+        const payload = jsonwebtoken.verify(jwt, process.env.JWT_SECRET);
+
+        try {
+          let {name, newName, image_URL} = req.body;
+          console.log(name)
+          let resp = await models.Skills.update({
+            name: newName,
+            image_URL:image_URL,
+          },{where: {name:name}});
+
+          res.status(200).json({
+            success: true,
+            message: `The skill ${newName} has been updated`,
+          });    
+
+        } catch (error) {
+            res.status(400).json({
+                success: false,
+                message: "The skill could not be updated" + error.message,
+              });      
+              }
+        
+              
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message,
+          });      
+    }
+}
 
 module.exports = skillsEndpoints;
