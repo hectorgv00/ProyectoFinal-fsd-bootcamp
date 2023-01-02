@@ -6,6 +6,9 @@ const {
   encryptPassword,
 } = require("../services/authServices");
 const candidatesEndpoints = {};
+const { Op } = require("sequelize");
+const { sequelize } = require("../models/index");
+const { QueryTypes } = require("sequelize");
 
 candidatesEndpoints.newCandidate = async (req, res) => {
   try {
@@ -64,11 +67,9 @@ candidatesEndpoints.loginCandidate = async (req, res) => {
     });
 
     if (!userFound) {
-      res
-        .status(401)
-        .json({
-          message: "Password or email is incorrect",
-        }); 
+      res.status(401).json({
+        message: "Password or email is incorrect",
+      });
       return;
     }
 
@@ -100,6 +101,25 @@ candidatesEndpoints.loginCandidate = async (req, res) => {
       message: "Login successful",
       jwt: jwt,
     });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+candidatesEndpoints.findByName = async (req, res) => {
+  try {
+    const { name } = req.params;
+    const users = await models.user.findAll({
+      where: {
+        name: {
+          [Op.like]: `%${name}%`,
+        },
+      },
+    });
+    return res.status(200).json(users);
   } catch (error) {
     res.status(500).json({
       success: false,
