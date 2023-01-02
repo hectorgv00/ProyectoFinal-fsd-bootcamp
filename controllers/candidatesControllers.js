@@ -1,14 +1,12 @@
 const models = require("../models/index");
 const jsonwebtoken = require("jsonwebtoken");
+const { Op } = require("sequelize");
 const {
   assertValidPasswordService,
   assertEmailIsValid,
   encryptPassword,
 } = require("../services/authServices");
 const candidatesEndpoints = {};
-const { Op } = require("sequelize");
-const { sequelize } = require("../models/index");
-const { QueryTypes } = require("sequelize");
 
 candidatesEndpoints.newCandidate = async (req, res) => {
   try {
